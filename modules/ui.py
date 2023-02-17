@@ -530,14 +530,14 @@ def create_ui():
                     fn=calc_resolution_hires,
                     inputs=hr_resolution_preview_inputs,
                     outputs=[hr_final_resolution],
-                    show_progress=False,
+                    show_progress=True,
                 )
                 input.change(
                     None,
                     _js="onCalcResolutionHires",
                     inputs=hr_resolution_preview_inputs,
                     outputs=[],
-                    show_progress=False,
+                    show_progress=True,
                 )
 
             txt2img_gallery, generation_info, html_info, html_log = create_output_panel("txt2img", opts.outdir_txt2img_samples)
@@ -580,11 +580,11 @@ def create_ui():
                     html_info,
                     html_log,
                 ],
-                show_progress=False,
+                show_progress=True,
             )
 
-            txt2img_prompt.submit(**txt2img_args)
-            submit.click(**txt2img_args)
+            # txt2img_prompt.submit(**txt2img_args)
+            # submit.click(**txt2img_args)
 
             res_switch_btn.click(lambda w, h: (h, w), inputs=[width, height], outputs=[width, height])
 
@@ -884,7 +884,7 @@ def create_ui():
                     html_info,
                     html_log,
                 ],
-                show_progress=False,
+                show_progress=True,
             )
 
             interrogate_args = dict(
@@ -902,8 +902,8 @@ def create_ui():
                 outputs=[img2img_prompt, dummy_component],
             )
 
-            img2img_prompt.submit(**img2img_args)
-            submit.click(**img2img_args)
+            # img2img_prompt.submit(**img2img_args)
+            # submit.click(**img2img_args)
             res_switch_btn.click(lambda w, h: (h, w), inputs=[width, height], outputs=[width, height])
 
             img2img_interrogate.click(
@@ -1533,8 +1533,8 @@ def create_ui():
         (img2img_interface, "img2img", "img2img"),
         (extras_interface, "Extras", "extras"),
         (pnginfo_interface, "PNG Info", "pnginfo"),
-        (modelmerger_interface, "Checkpoint Merger", "modelmerger"),
-        (train_interface, "Train", "ti"),
+        #(modelmerger_interface, "Checkpoint Merger", "modelmerger"),
+        #(train_interface, "Train", "ti"),
     ]
 
     css = ""
@@ -1554,10 +1554,10 @@ def create_ui():
         css += css_hide_progressbar
 
     interfaces += script_callbacks.ui_tabs_callback()
-    interfaces += [(settings_interface, "Settings", "settings")]
+    # interfaces += [(settings_interface, "Settings", "settings")]
 
     extensions_interface = ui_extensions.create_ui()
-    interfaces += [(extensions_interface, "Extensions", "extensions")]
+    # interfaces += [(extensions_interface, "Extensions", "extensions")]
 
     with gr.Blocks(css=css, analytics_enabled=False, title="Stable Diffusion") as demo:
         with gr.Row(elem_id="quicksettings", variant="compact"):
